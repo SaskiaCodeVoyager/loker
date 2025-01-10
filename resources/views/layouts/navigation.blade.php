@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 <div class="min-h-screen flex bg-gray-50">
     <!-- Sidebar Navigation -->
     <nav class="bg-white w-64 h-screen p-4 border-r shadow-lg">
@@ -36,7 +34,7 @@
  
             <!-- Sidebar Menu -->
             <ul class="space-y-2">
-                @foreach (Auth::user()->resumes as $resume)
+                @if(Auth::user()->role == 'user')
                     <li>
                         <a href="{{ route('dashboard') }}" 
                            class="block py-2 px-3 rounded hover:bg-orange-100 {{ request()->routeIs('dashboard') ? 'bg-orange-100' : '' }}">
@@ -49,27 +47,8 @@
                             Resume
                         </a>
                     </li>
-                @endforeach
+                    @endif     
             </ul>
         </div>
     </nav>
-
-    <!-- Main Content -->
-    <main class="flex-1 p-6">
-        <h2 class="text-2xl font-bold text-orange-600 mb-4">Dashboard</h2>
-        @foreach (Auth::user()->resumes as $resume)
-            <div class="mt-4 bg-white p-6 rounded-lg shadow-md">
-                {{-- <h3 class="text-lg font-semibold text-gray-800">{{ $resume->title }}</h3>
-                <p class="text-sm text-gray-600 mt-2">{{ $resume->description }}</p> --}}
-            </div>
-        @endforeach
-
-        @if (Auth::user()->resumes->isEmpty())
-            <h2 class="text-xl font-bold text-orange-600 mb-4">Peringatan</h2>
-            <p class="text-sm text-gray-700">
-                Anda belum mengisi resume. Harap <a href="{{ route('resume.create') }}" class="text-orange-600 underline">isi resume</a> Anda untuk mengakses Dashboard.
-            </p>
-        @endif
-    </main>
 </div>
-@endsection

@@ -65,7 +65,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/resumes', [ResumeController::class, 'index'])->name('resume.index');
     Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
